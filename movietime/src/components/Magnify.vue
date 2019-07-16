@@ -204,7 +204,8 @@ export default {
   }
 }
 </style>
-<style>
+
+ <style scoped>
 .clear::after {
   clear: both;
 }
