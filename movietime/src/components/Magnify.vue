@@ -53,7 +53,7 @@
 
                 <el-row class="btnbox">
                   <el-button type="danger" round>立即购买</el-button>
-                  <el-button round>
+                  <el-button round style="color:#F56C6C">
                     <i class="el-icon-shopping-cart-2"></i>加入购物车
                   </el-button>
                 </el-row>
@@ -204,8 +204,7 @@ export default {
   }
 }
 </style>
-
- <style scoped>
+<style scoped>
 .clear::after {
   clear: both;
 }
