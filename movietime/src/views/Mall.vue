@@ -242,7 +242,6 @@
               :myalt="gsu.name"
               :id="gsu.id"
             ></my-gsulike>
-            <el-button type="primary" round size="medium" style="margin:20px auto 0px">查看更多</el-button>
           </div>
         </div>
       </el-col>
