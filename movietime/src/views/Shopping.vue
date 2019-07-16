@@ -1,6 +1,6 @@
 <template>
   <div>
-    <top-menu></top-menu>
+ 
 
     <el-row :gutter="0">
       <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -49,18 +49,16 @@
   </div>
 </template>
 <script>
+import Prolist from "@/components/prolist.vue";
 export default {
   data() {
-    return {
-      data: {}
-    };
+    return {};
+  },
+  components: {
+    prolist: Prolist
   }
 };
 </script>
-
-  
-
-
 <style >
 .trade {
   width: 100%;
@@ -128,5 +126,6 @@ export default {
   color: #999;
 }
 </style>
+
 
 
