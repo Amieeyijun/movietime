@@ -1,7 +1,5 @@
 <template>
   <div>
- 
-
     <el-row :gutter="0">
       <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         <!-- 导航栏s -->
@@ -20,28 +18,7 @@
             </div>
           </div>
         </div>
-        <!-- 商品栏 -->
-        <div class="content">
-          <div class="cart_conter">
-            <div class="cart_prolist">
-              <ul>
-                <li>
-                  <input type="checkbox" name="selectall" />
-                  全选
-                </li>
-                <li>商品信息</li>
-                <li>单价</li>
-                <li>优惠</li>
-                <li>数量</li>
-                <li>小计</li>
-                <li>操作</li>
-              </ul>
-            </div>
-            <div class="cart_prolist">
-              <prolist></prolist>
-            </div>
-          </div>
-        </div>
+        <prolist></prolist>
         <bottom-menu></bottom-menu>
       </el-col>
     </el-row>
@@ -49,7 +26,6 @@
 </template>
 <script>
 import Prolist from "@/components/prolist.vue";
-
 export default {
   data() {
     return {};
@@ -100,31 +76,7 @@ export default {
   color: #1c7ca9;
   border-color: #1c7ca9;
 }
-.content {
-  width: 100%;
-}
-.cart_conter {
-  width: 1000px;
-  margin: auto;
-  font-size: 14px;
-}
-.cart_prolist {
-  width: 1000px;
-  height: 63px;
-  border-bottom: 2px solid #eaeaea;
-  line-height: 5.5em;
-  padding: 0px 2em 0 1em;
-  box-sizing: border-box;
-}
-.cart_prolist ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-}
-.cart_prolist li {
-  font-size: 14px;
-  color: #999;
-}
+
 </style>
 
 
