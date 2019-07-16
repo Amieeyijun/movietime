@@ -159,7 +159,7 @@ app.post("/Load", function (req, res) {
 			if (results[0].password == req.body.pass) {
 				res.json({
 					msg: "same",
-					userinfo: results[0]
+					userinfo:results[0]
 				})
 			} else {
 				res.json({
