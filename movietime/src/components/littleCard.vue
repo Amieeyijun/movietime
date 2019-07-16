@@ -1,6 +1,6 @@
 <template>
   <div class="bigbox">
-    <div  class="imgbox">
+    <div class="imgbox">
       <img :src="mysrc" />
       <span>{{mysroce}}</span>
     </div>
@@ -12,21 +12,29 @@
         <img src="../../img/上引号.png" alt />
         <p>{{mycont}}</p>
       </div>
-      <div class="buy" @click="fn" >选座购票</div>
+      <div class="buy" @click="fn" @mouseover="fm" :id="filmid">选座购票</div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  data(){
-    return{}
+  data() {
+    return {};
   },
-  props:['mysrc','mysroce','myname','myduration','mytype','mycont'],
-  methods:{
-    fn(){
-      console.log(this)
-    }
-    
+  props: [
+    "mysrc",
+    "mysroce",
+    "myname",
+    "myduration",
+    "mytype",
+    "mycont",
+    "filmid"
+  ],
+  methods: {
+    fn() {
+      this.$store.state.filmid = this.filmid;
+    },
+    fm() {}
   }
 };
 </script>
@@ -101,8 +109,8 @@ export default {
   letter-spacing: 2px;
   color: #fff;
   text-decoration: none;
-  margin-left:  5px;
-  margin-top: 24px
+  margin-left: 5px;
+  margin-top: 24px;
 }
 </style>
 

@@ -30,6 +30,7 @@
                   :myduration="m.duration"
                   :mytype="m.cates"
                   :mycont="m.comts"
+                  :filmid='m.id'
                 ></littleCard>
               </div>
               <div class="midbox_con_btm">
@@ -58,6 +59,7 @@
                   :mytype="f.cates"
                   :mydirector="f.director"
                   :mydate="f.rels"
+                  
                 ></upcoming>
               </div>
             </div>

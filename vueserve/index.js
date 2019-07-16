@@ -162,6 +162,13 @@ app.get('/film', (req, res) => {
 		res.send(results);
 	})
 })
+// 根据电影id获取电影
+app.get('/filmId', (req, res) => {
+	let sql = `select * from movie where id = ${req.query.id} `
+	mydb.query(sql, function (err, results) {
+		res.send(results);
+	})
+})
 
 //登录
 app.post("/Load", function (req, res) {

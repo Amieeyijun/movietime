@@ -18,9 +18,8 @@
             </div>
           </div>
         </div>
-        <prolist></prolist>
-        <div v-if="hide">
-          <consignee></consignee>
+        <div v-if="tag">
+          <prolist></prolist>
         </div>
         <el-button v-if="hi" style="margin-top: 0px;" @click="next">生成订单</el-button>
         <el-button v-if="he" style="margin-top: 0px;" @click="next">前往支付</el-button>
@@ -35,13 +34,15 @@ import consignee from '../components/consignee'
 export default {
   data() {
     return {
-      active: 0,
+ active: 0,
       hide:false,
       hi:true,
-      he:false
+      he:false,
+      filmdata: [],
+      tag: false
     };
   },
-  methods: {
+    methods: {
     next() {
       if (this.active++ > 2) this.active = 0;
       this.hide=true;
@@ -50,8 +51,29 @@ export default {
     }
   },
   components: {
-    prolist: Prolist,
+  prolist: Prolist,
     consignee:consignee
+   
+  },
+  created() {
+    console.log(this.$store.state.filmid);
+    this.axios
+      .get("/filmId", {
+        params: {
+          id: this.$store.state.filmid
+        }
+      })
+      .then(res => {
+        this.filmdata = res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  mounted() {
+    if (this.filmdata) {  
+      this.tag = true;
+    }
   }
 };
 </script>
