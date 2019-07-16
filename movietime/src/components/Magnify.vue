@@ -8,7 +8,7 @@
         mode="horizontal"
         active-text-color="black"
       >
-        <el-menu-item index="1" style="font-size: 16px;font-weight: 600;margin-left:7em">全部商品</el-menu-item>
+        <el-menu-item index="1" style="font-size: 16px;font-weight: 600;margin-left:7em">商品详情</el-menu-item>
         <el-menu-item index="2" style="font-size: 16px;font-weight: 600;">新品</el-menu-item>
       </el-menu>
       <Sousuo style="margin:10px 100px;"></Sousuo>
@@ -239,7 +239,6 @@ h2 {
   line-height: 4em;
 }
 .jxbox {
-  border: 1px solid #df4949;
   margin-left: 3em;
 }
 .zoom-box {

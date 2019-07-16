@@ -124,6 +124,23 @@ app.post("/Registe", function (req, res) {
 	})
 });
 
+//订单接口
+app.post("/consignee", function (req, res) {
+	console.log(req.query)
+	let sql = `insert into shopping(people,address,phone,beizhu) values ("${req.body.people}","${req.body.address}","${req.body.phone}","${req.body.beizhu}")`;
+
+	mydb.query(sql, function (err, results) {
+		if (err) {
+			console.log(err);
+			return;
+		} else {
+			res.json({
+				msg: "ok"
+			})
+		}
+	})
+});
+
 // 影院数据接口
 app.get('/cinema', (req, res) => {
 	let sql = `select * from cinema where type = ${req.query.type} `
@@ -146,7 +163,7 @@ app.get('/film', (req, res) => {
 	})
 })
 
-
+//登录
 app.post("/Load", function (req, res) {
 	var sql = "select * from user where ";
 	console.log(req.body)

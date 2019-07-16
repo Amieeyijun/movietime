@@ -45,11 +45,11 @@
         <bottom-menu></bottom-menu>
       </el-col>
     </el-row>
-    <bottom-menu></bottom-menu>
   </div>
 </template>
 <script>
 import Prolist from "@/components/prolist.vue";
+
 export default {
   data() {
     return {};
