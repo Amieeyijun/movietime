@@ -9,15 +9,19 @@
       text-color="#fff"
       active-text-color="#ffd04b"
     >
-    <div id="title"> <img src="../../img/title1.jpg" alt=""></div>
-    <div class="top-1">
-      <el-menu-item index="1" >首页</el-menu-item>
-      <el-menu-item index="2">购票</el-menu-item>
-      <el-menu-item index="3">正版商城</el-menu-item>
-      <el-menu-item index="4">新闻</el-menu-item>
-      <el-menu-item index="5">发现</el-menu-item>
-    </div>
-      
+      <div id="title">
+        <img src="../../img/title1.jpg" alt />
+      </div>
+      <div class="top-1">
+        <el-menu-item index="1" style=" letter-spacing: 20px;text-align: center;">首页</el-menu-item>
+
+        <el-menu-item index="2" style=" letter-spacing: 20px; text-align: center;">购票</el-menu-item>
+
+        <el-menu-item index="3" style=" letter-spacing: 10px;text-align: center;">正版商城</el-menu-item>
+        <el-menu-item index="4" style=" letter-spacing: 20px;text-align: center;">新闻</el-menu-item>
+        <el-menu-item index="5" style=" letter-spacing: 20px; text-align: center;">发现</el-menu-item>
+      </div>
+
       <el-menu-item index="10" class="el-icon-shopping-bag-2 right1"></el-menu-item>
       <el-menu-item index="7" class="el-icon-user right2"></el-menu-item>
     </el-menu>
@@ -114,7 +118,8 @@ export default {
   right: 2%;
   float: left;
 }
-.top-1{
+.top-1 {
+  width: 60%;
   display: flex;
   justify-content: space-around;
   float: left;
