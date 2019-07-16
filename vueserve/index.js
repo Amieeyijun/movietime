@@ -60,7 +60,7 @@ app.get("/getclothesgoods", function (req, res) {
 });
 //获取生活商品
 app.get("/getlifegoods", function (req, res) {
-	let sql = "select * from product where type =" + `'${req.query.newstype}'`;
+	let sql = "select * from product where type =" + `'${req.query.goodsclass}'`;
 
 	mydb.query(sql, function (err, results) {
 		res.send(results);
@@ -74,6 +74,7 @@ app.get("/getNews", function (req, res) {
 		res.send(results);
 	})
 });
+
 
 //获取猜你喜欢的商品
 app.get("/getgsulike", function (req, res) {

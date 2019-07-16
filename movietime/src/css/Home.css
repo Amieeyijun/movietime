@@ -994,7 +994,8 @@ dd.odd {
     font-size: 16px;
     width: 100%;
     height: 31px;
-    padding-top: 10px;
+    padding-top: 8px;
+    line-height: 31px;
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1003,7 +1004,6 @@ dd.odd {
 }
 
 .eightall div p {
-    padding-top: 3px;
     width: 100%;
     height: 21.18px;
     color: #888;
