@@ -66,6 +66,7 @@ app.get("/getlifegoods", function (req, res) {
 		res.send(results);
 	})
 });
+//获取新闻
 app.get("/getNews", function (req, res) {
 
 	let sql = "select * from news where type =" + `'${req.query.news}'`;
