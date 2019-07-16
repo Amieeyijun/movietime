@@ -64,9 +64,9 @@
         <div class="settlement_btn">
           <span>共 0 件商品，商品总价(不含运费):</span>
           ￥0
-          <div>
+          <!-- <div>
             <a href="#">去结算</a>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -172,7 +172,7 @@ export default {
   font-size: 16px;
   display: inline-block;
 }
-.settlement_btn div {
+/* .settlement_btn div {
   background: #dd4a4d;
   width: 150px;
   height: 44px;
@@ -183,10 +183,10 @@ export default {
   overflow: hidden;
   border-radius: 3px;
   margin-right: 15px;
-}
-.settlement_btn a {
+} */
+/* .settlement_btn a {
   color: white;
-}
+} */
 .details {
   width: 1000px;
   height: 160px;
@@ -281,4 +281,3 @@ export default {
   outline: none;
 }
 </style>
-

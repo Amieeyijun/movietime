@@ -93,6 +93,6 @@ export default {
 .consign {
   width: 500px;
   height: 370px;
-  margin: 20px auto;
+  margin: 20px 25em;
 }
 </style>

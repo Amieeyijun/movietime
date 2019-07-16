@@ -9,16 +9,21 @@
           <div class="trade_head">
             <h3>我的购物车</h3>
             <div class="trade_step">
-              <el-steps :active="0" align-center>
+              <el-steps :active="active" finish-status="success" align-center>
                 <el-step title="我的购物车"></el-step>
                 <el-step title="填写订单"></el-step>
                 <el-step title="付款"></el-step>
                 <el-step title="支付成功"></el-step>
-              </el-steps>
+              </el-steps>             
             </div>
           </div>
         </div>
         <prolist></prolist>
+        <div v-if="hide">
+          <consignee></consignee>
+        </div>
+        <el-button v-if="hi" style="margin-top: 0px;" @click="next">生成订单</el-button>
+        <el-button v-if="he" style="margin-top: 0px;" @click="next">前往支付</el-button>
         <bottom-menu></bottom-menu>
       </el-col>
     </el-row>
@@ -26,12 +31,27 @@
 </template>
 <script>
 import Prolist from "@/components/prolist.vue";
+import consignee from '../components/consignee'
 export default {
   data() {
-    return {};
+    return {
+      active: 0,
+      hide:false,
+      hi:true,
+      he:false
+    };
+  },
+  methods: {
+    next() {
+      if (this.active++ > 2) this.active = 0;
+      this.hide=true;
+      this.hi=false;
+      this.he=true
+    }
   },
   components: {
-    prolist: Prolist
+    prolist: Prolist,
+    consignee:consignee
   }
 };
 </script>
@@ -76,7 +96,6 @@ export default {
   color: #1c7ca9;
   border-color: #1c7ca9;
 }
-
 </style>
 
 
