@@ -89,7 +89,8 @@ export default {
       });
   },
   mounted() {
-    if (this.filmdata) {  
+    console.log(this.filmdata);
+    if (this.$store.state.filmid) {
       this.tag = true;
     }
   }
