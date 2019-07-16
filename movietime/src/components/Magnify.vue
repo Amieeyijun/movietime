@@ -53,7 +53,7 @@
 
                 <el-row class="btnbox">
                   <el-button type="danger" round>立即购买</el-button>
-                  <el-button round style="color:#F56C6C">
+                  <el-button round style="color:#F56C6C" @click="getbookid">
                     <i class="el-icon-shopping-cart-2"></i>加入购物车
                   </el-button>
                 </el-row>
@@ -156,6 +156,9 @@ export default {
       this.bHeight = this.imgBox.offsetHeight;
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop;
+    },
+    getbookid() {
+      this.$store.state.goodsid = this.$route.query.id;
     }
   }
 };

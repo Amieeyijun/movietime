@@ -39,7 +39,8 @@ export default {
       hi:true,
       he:false,
       filmdata: [],
-      tag: false
+      tag: false,
+       goodsdata: {}
     };
   },
     methods: {
@@ -65,6 +66,20 @@ export default {
       })
       .then(res => {
         this.filmdata = res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.axios
+      .get("http://localhost:8888/serachgoods", {
+        params: {
+          goodsid: this.$store.state.goodsid
+        }
+      })
+      .then(res => {
+        console.log(res.data[0]);
+        this.goodsdata = res.data[0];
       })
       .catch(err => {
         console.log(err);

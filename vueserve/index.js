@@ -93,7 +93,14 @@ app.get("/getdetail", function (req, res) {
 		res.send(results);
 	})
 });
+//获取购物车的商品数据
+app.get("/serachgoods", function (req, res) {
+	let sql = "select * from product where id =" + req.query.goodsid;
 
+	mydb.query(sql, function (err, results) {
+		res.send(results);
+	})
+});
 // 注册
 
 app.post("/Registe", function (req, res) {
@@ -185,7 +192,7 @@ app.post("/Load", function (req, res) {
 			if (results[0].password == req.body.pass) {
 				res.json({
 					msg: "same",
-					userinfo:results[0]
+					userinfo: results[0]
 				})
 			} else {
 				res.json({

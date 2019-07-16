@@ -5,12 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    filmid:''
-
+    goodsid: "",
+     filmid:''
   },
   mutations: {
 
   },
+  getters: {
+
+  },
+
   actions: {
 
   }
