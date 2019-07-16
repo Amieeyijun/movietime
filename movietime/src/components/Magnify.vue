@@ -204,12 +204,8 @@ export default {
   }
 }
 </style>
-<<<<<<< HEAD
-<style scoped>
-=======
 
  <style scoped>
->>>>>>> c9894ed34cd2337b4938c2bb117c7c9839ea64e0
 .clear::after {
   clear: both;
 }
