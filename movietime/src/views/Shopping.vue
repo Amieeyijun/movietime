@@ -21,6 +21,9 @@
         <div v-if="tag">
           <prolist></prolist>
         </div>
+        <div v-if="hide">
+          <consignee></consignee>
+        </div>
         <el-button v-if="hi" style="margin-top: 0px;" @click="next">生成订单</el-button>
         <el-button v-if="he" style="margin-top: 0px;" @click="next">前往支付</el-button>
         <bottom-menu></bottom-menu>
