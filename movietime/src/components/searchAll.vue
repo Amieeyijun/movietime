@@ -52,8 +52,6 @@ export default {
       .catch(err => {
         console.log(err);
       });
-    this.goodsdata = this.$store.state.goodsdata;
-    console.log(this.goodsdata + "---------created");
   }
 };
 </script>
