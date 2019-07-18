@@ -159,6 +159,7 @@ export default {
     },
     getbookid() {
       this.$store.state.goodsid = this.$route.query.id;
+      this.$store.state.shopcar += 1;
     }
   }
 };

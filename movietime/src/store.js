@@ -6,12 +6,17 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     goodsid: "",
-     filmid:''
+    filmid: '',
+    shopcar: 0
   },
   mutations: {
 
   },
   getters: {
+    //购物车上面数字增加
+    shopcarnum: state => {
+      return state.shopcar += 0
+    }
 
   },
 

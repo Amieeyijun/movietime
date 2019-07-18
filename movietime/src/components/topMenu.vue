@@ -22,7 +22,9 @@
         <el-menu-item index="5" style=" l text-align: center;">发现</el-menu-item>
       </div>
 
-      <el-menu-item index="10" class="el-icon-shopping-bag-2 right1"></el-menu-item>
+      <el-menu-item index="10" class="el-icon-shopping-bag-2 right1">
+        <div class="num">{{this.$store.getters.shopcarnum}}</div>
+      </el-menu-item>
       <el-menu-item index="7" class="el-icon-user right2"></el-menu-item>
     </el-menu>
 
@@ -99,7 +101,7 @@ export default {
 #title img{
   width: 170px;
   height: 75px;
-  margin-top:-10px 
+  margin-top: -10px;
 }
 #title{
   width: 170px;
@@ -108,15 +110,28 @@ export default {
   float: left;
 }
 
-.right1{
+.right1 {
   position: absolute;
   right: 6%;
-  float: left;
+  font-size: 24px;
 }
-.right2{
+.num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f56c6c;
+  color: white;
+  position: absolute;
+  top: 14px;
+  left: 34px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+}
+.right2 {
+  font-size: 24px;
   position: absolute;
   right: 2%;
-  float: left;
 }
 .top-1 {
   width: 34%;
