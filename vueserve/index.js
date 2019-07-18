@@ -66,6 +66,28 @@ app.get("/getlifegoods", function (req, res) {
 		res.send(results);
 	})
 });
+//根据关键字搜索商品
+app.get("/searchgoods", function (req, res) {
+	let sql = "select * from product where name like '%" + req.query.goodsname + "%' limit 0,10";
+	console.log(sql);
+	mydb.query(sql, function (err, results) {
+		if (err) {
+			console.log(err);
+		}
+		res.send(results);
+	})
+});
+//点击input搜索按钮搜索包含关键字的全部商品
+app.get("/searchinput", function (req, res) {
+	let sql = "select * from product where name like '%" + req.query.goodsname + "%'";
+	console.log(sql);
+	mydb.query(sql, function (err, results) {
+		if (err) {
+			console.log(err);
+		}
+		res.send(results);
+	})
+});
 //获取新闻
 app.get("/getNews", function (req, res) {
 

@@ -9,6 +9,8 @@ import Discover from './views/Discover.vue'
 import Shopping from './views/Shopping.vue'
 import Load from './views/Load.vue'
 import Magnify from "./components/Magnify.vue";
+import searchAll from "./components/searchAll.vue";
+
 
 Vue.use(Router)
 
@@ -49,6 +51,10 @@ export default new Router({
     {
       path: '/Magnify',
       component: Magnify
+    },
+    {
+      path: '/searchAll',
+      component: searchAll
     }
   ]
 })

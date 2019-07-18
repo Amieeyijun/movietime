@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+//ÒýÈëelementui
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import store from './store'
@@ -20,7 +21,7 @@ Vue.prototype.axios = axios
 axios.defaults.baseURL = "http://localhost:8888"
 
 Vue.config.productionTip = false
-
+//elementui
 Vue.use(ElementUI);
 
 

@@ -14,238 +14,271 @@
         <el-menu-item index="2" class="myfon1">全部产品</el-menu-item>
         <el-menu-item index="3" class="myfon1">新品</el-menu-item>
       </el-menu>
-      <Sousuo></Sousuo>
+      <!-- 搜索框 -->
+      <div class="search">
+        <div class="sousuo">
+          <div>
+            <el-dropdown>
+              <span class="el-dropdown-link">
+                全部
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="a">全部</el-dropdown-item>
+                <el-dropdown-item command="b">电影</el-dropdown-item>
+                <el-dropdown-item command="c">影人</el-dropdown-item>
+                <el-dropdown-item command="d">影院</el-dropdown-item>
+                <el-dropdown-item command="e">商品</el-dropdown-item>
+                <el-dropdown-item command="f">新闻</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <i></i>
+            <span class="span">|</span>
+          </div>
+          <div class="inputbox">
+            <input type="text" v-model="keyword" placeholder="请输入电影、商品、影院等" />
+            <div class="searchdetail">
+              <ul v-for="(n,index) in goodsnamedata" :key="(n,index)">
+                <a :href="'/Magnify?id='+n.id">
+                  <li
+                    class="mylistyle"
+                    @mouseenter="changegray(index)"
+                    @mouseleave="changewhite(index)"
+                  >{{n.name}}</li>
+                </a>
+              </ul>
+            </div>
+          </div>
+          <div class="el-icon-search icon" @click="searchinput"></div>
+        </div>
+      </div>
     </div>
 
-    <el-row>
-      <el-col :xs="21" :sm="21" :md="21" :lg="21" :xl="21" style="margin-left:5em;overflow:hidden">
-        <div class="grid-content">
-          <div class="centerbox">
-            <!-- 轮播图左边导航栏 -->
-            <div class="leftbox">
-              <div
-                v-for="(a,index) in guidearr"
-                :key="(a,index)"
-                @mouseenter="displayblock(index)"
-                @mouseleave="changecolor(index)"
-              >
-                <div class="guidelist">
-                  <i :class="a.class1"></i>
-                  <div>
-                    <p style="font-weight:700">{{a.p1}}</p>
-                    <p>{{a.p2}}}</p>
-                  </div>
-                  <i class="el-icon-arrow-right"></i>
-                </div>
+    <div class="container">
+      <div class="centerbox">
+        <!-- 轮播图左边导航栏 -->
+        <div class="leftbox">
+          <div
+            v-for="(a,index) in guidearr"
+            :key="(a,index)"
+            @mouseenter="displayblock(index)"
+            @mouseleave="changecolor(index)"
+          >
+            <div class="guidelist">
+              <i :class="a.class1"></i>
+              <div>
+                <p style="font-weight:700">{{a.p1}}</p>
+                <p>{{a.p2}}}</p>
               </div>
-
-              <div class="infobox" v-show="block" @mouseleave="displaynone">
-                <div class="categorytip">
-                  <div class="categorylist">
-                    <dl>
-                      <dt>分类</dt>
-                      <!--分类最多只能有8个，切记-->
-                      <dd v-for="myclass in mya.goods_class" :key="myclass">
-                        <a href="#" target="_blank">{{myclass}}</a>
-                      </dd>
-                    </dl>
-
-                    <dl>
-                      <dt>品牌</dt>
-                      <!--品牌最多只能有8个，切记-->
-                      <dd v-for="mybrand in mya.goods_brand" :key="mybrand">
-                        <a href="#" target="_blank">{{mybrand}}</a>
-                      </dd>
-                    </dl>
-                    <a href="#" :title="mya.mytitle" class="feature" target="_blank">
-                      <img :src="mya.mysrc" width="260" height="320" :alt="mya.myalt" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 轮播图 -->
-            <div class="rightbox">
-              <el-carousel indicator-position="none" height="360px">
-                <el-carousel-item v-for="item in lunboimg" :key="item" style="height:100%">
-                  <img :src="item" class="img2" width="100%" height="100%" />
-                </el-carousel-item>
-              </el-carousel>
-            </div>
-          </div>
-          <!-- 三张图片盒子 -->
-          <div class="imgbox">
-            <div>
-              <img src="http://img5.mtime.cn/mg/2019/04/25/144418.51235204.jpg" />
-            </div>
-            <div>
-              <img src="http://img5.mtime.cn/mg/2019/07/08/144726.89440504.jpg" />
-            </div>
-            <div>
-              <img src="http://img5.mtime.cn/mg/2019/04/25/144052.46472264.jpg" />
-            </div>
-          </div>
-
-          <!-- 热门推荐商品展示 组件 -->
-          <my-goods
-            :mytitle="hotgoods.mytitle"
-            :lineguide="hotgoods.mylineguide"
-            :smimgdata="hotgoods.mysmimgdata"
-            :bigimg="hotgoods.mybigimg"
-          ></my-goods>
-
-          <!-- 优选品牌 -->
-          <div class="youxuanbox">
-            <div style="font-size:30px">优选品牌</div>
-            <el-divider>
-              合作品牌 68 家 | 查看更多
-              <i class="el-icon-right"></i>
-            </el-divider>
-
-            <div class="imgbox">
-              <div class="my-opacity">
-                <img src="http://img31.mtime.cn/mg/2016/05/20/151857.77676183.jpg" alt />
-              </div>
-              <div class="my-opacity">
-                <img src="http://img5.mtime.cn/mg/2016/12/13/193813.20271942.jpg" alt />
-              </div>
-              <div class="my-opacity">
-                <img src="http://img31.mtime.cn/mg/2016/05/20/203022.22983851.jpg" alt />
-              </div>
-            </div>
-          </div>
-
-          <!-- 玩具模型商品  toygoods-->
-          <my-goods
-            :mytitle="toygoods.mytitle"
-            :lineguide="toygoods.mylineguide"
-            :smimgdata="toygoods.mysmimgdata"
-            :bigimg="toygoods.mybigimg"
-          ></my-goods>
-
-          <!-- 数码配件商品 digitalgoods-->
-          <my-goods
-            :mytitle="digitalgoods.mytitle"
-            :lineguide="digitalgoods.mylineguide"
-            :smimgdata="digitalgoods.mysmimgdata"
-            :bigimg="digitalgoods.mybigimg"
-          ></my-goods>
-
-          <!-- 服装箱包商品  clothesgoods-->
-
-          <my-goods
-            :mytitle="clothesgoods.mytitle"
-            :lineguide="clothesgoods.mylineguide"
-            :smimgdata="clothesgoods.mysmimgdata"
-            :bigimg="clothesgoods.mybigimg"
-          ></my-goods>
-
-          <!-- 居家生活商品  lifegoods -->
-
-          <my-goods
-            :mytitle="lifegoods.mytitle"
-            :lineguide="lifegoods.mylineguide"
-            :smimgdata="lifegoods.mysmimgdata"
-            :bigimg="lifegoods.mybigimg"
-          ></my-goods>
-
-          <!-- 精选主题 -->
-          <div class="jingxuanbox">
-            <div style="font-size:30px">精选主题</div>
-            <el-divider>
-              新球大战 | 复仇者联盟 | 神偷奶爸 | 蜘蛛侠 | 查看更多
               <i class="el-icon-arrow-right"></i>
-            </el-divider>
-
-            <div
-              class="jximgbox clear"
-              style="background-image: url('http://img5.mtime.cn/mg/2019/07/03/165526.58329947.jpg')"
-            >
-              <div class="bcimgbox">
-                <div
-                  style="background-image: url('http://img5.mtime.cn/mg/2019/07/03/165932.18328130.jpg')"
-                >
-                  <strong>￥ 99</strong>
-                </div>
-                <div
-                  style="background-image: url('http://img5.mtime.cn/mg/2019/07/03/170150.34640365.jpg')"
-                >
-                  <strong>￥ 49</strong>
-                </div>
-                <div
-                  style="background-image: url('http://img5.mtime.cn/mg/2019/07/03/170200.39184557.jpg')"
-                >
-                  <strong>￥ 39</strong>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="jximgbox clear"
-              style="background-image: url('http://img5.mtime.cn/mg/2019/04/25/181312.36353315.jpg')"
-            >
-              <div class="bcimgbox">
-                <div
-                  style="background-image: url('http://img5.mtime.cn/mg/2019/04/25/181149.19549901.jpg')"
-                >
-                  <strong>￥ 45</strong>
-                </div>
-                <div
-                  style="background-image: url('http://img5.mtime.cn/mg/2019/04/25/181342.71876299.jpg')"
-                >
-                  <strong>￥ 239</strong>
-                </div>
-                <div
-                  style="background-image: url('http://img5.mtime.cn/mg/2019/04/25/181406.52340258.jpg')"
-                >
-                  <strong>￥ 49</strong>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="jximgbox clear"
-              style="background-image: url('http://img5.mtime.cn/mg/2018/08/07/152154.20104873.jpg')"
-            >
-              <div class="bcimgbox">
-                <div
-                  style="background-image: url('http://img5.mtime.cn/mg/2018/08/20/101644.41505034.jpg')"
-                >
-                  <strong>￥ 40</strong>
-                </div>
-                <div
-                  style="background-image: url('http://img5.mtime.cn/mg/2018/11/26/150507.15240230.jpg')"
-                >
-                  <strong>￥ 129</strong>
-                </div>
-                <div
-                  style="background-image: url('http://img5.mtime.cn/mg/2018/08/07/154243.96899805.jpg')"
-                >
-                  <strong>￥ 39</strong>
-                </div>
-              </div>
             </div>
           </div>
 
-          <el-divider>
-            <span style="font-size:25px">猜 你 喜 欢</span>
-          </el-divider>
+          <div class="infobox" v-show="block" @mouseleave="displaynone">
+            <div class="categorytip">
+              <div class="categorylist">
+                <dl>
+                  <dt>分类</dt>
+                  <!--分类最多只能有8个，切记-->
+                  <dd v-for="myclass in mya.goods_class" :key="myclass">
+                    <a href="#" target="_blank">{{myclass}}</a>
+                  </dd>
+                </dl>
 
-          <!-- 猜你喜欢 -->
-          <div class="gsylikebox">
-            <my-gsulike
-              v-for="(gsu,index) in gsulikegoods"
-              :key="index"
-              :mysrc="gsu.img"
-              :goodsname="gsu.name"
-              :price="gsu.price"
-              :myalt="gsu.name"
-              :id="gsu.id"
-            ></my-gsulike>
+                <dl>
+                  <dt>品牌</dt>
+                  <!--品牌最多只能有8个，切记-->
+                  <dd v-for="mybrand in mya.goods_brand" :key="mybrand">
+                    <a href="#" target="_blank">{{mybrand}}</a>
+                  </dd>
+                </dl>
+                <a href="#" :title="mya.mytitle" class="feature" target="_blank">
+                  <img :src="mya.mysrc" width="260" height="320" :alt="mya.myalt" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </el-col>
-    </el-row>
+        <!-- 轮播图 -->
+        <div class="rightbox">
+          <el-carousel indicator-position="none" height="360px">
+            <el-carousel-item v-for="item in lunboimg" :key="item" style="height:100%">
+              <img :src="item" class="img2" width="100%" height="100%" />
+            </el-carousel-item>
+          </el-carousel>
+        </div>
+      </div>
+      <!-- 三张图片盒子 -->
+      <div class="imgbox">
+        <div>
+          <img src="http://img5.mtime.cn/mg/2019/04/25/144418.51235204.jpg" />
+        </div>
+        <div>
+          <img src="http://img5.mtime.cn/mg/2019/07/08/144726.89440504.jpg" />
+        </div>
+        <div>
+          <img src="http://img5.mtime.cn/mg/2019/04/25/144052.46472264.jpg" />
+        </div>
+      </div>
+
+      <!-- 热门推荐商品展示 组件 -->
+      <my-goods
+        :mytitle="hotgoods.mytitle"
+        :lineguide="hotgoods.mylineguide"
+        :smimgdata="hotgoods.mysmimgdata"
+        :bigimg="hotgoods.mybigimg"
+      ></my-goods>
+
+      <!-- 优选品牌 -->
+      <div class="youxuanbox">
+        <div style="font-size:30px">优选品牌</div>
+        <el-divider>
+          合作品牌 68 家 | 查看更多
+          <i class="el-icon-right"></i>
+        </el-divider>
+
+        <div class="imgbox">
+          <div class="my-opacity">
+            <img src="http://img31.mtime.cn/mg/2016/05/20/151857.77676183.jpg" alt />
+          </div>
+          <div class="my-opacity">
+            <img src="http://img5.mtime.cn/mg/2016/12/13/193813.20271942.jpg" alt />
+          </div>
+          <div class="my-opacity">
+            <img src="http://img31.mtime.cn/mg/2016/05/20/203022.22983851.jpg" alt />
+          </div>
+        </div>
+      </div>
+
+      <!-- 玩具模型商品  toygoods-->
+      <my-goods
+        :mytitle="toygoods.mytitle"
+        :lineguide="toygoods.mylineguide"
+        :smimgdata="toygoods.mysmimgdata"
+        :bigimg="toygoods.mybigimg"
+      ></my-goods>
+
+      <!-- 数码配件商品 digitalgoods-->
+      <my-goods
+        :mytitle="digitalgoods.mytitle"
+        :lineguide="digitalgoods.mylineguide"
+        :smimgdata="digitalgoods.mysmimgdata"
+        :bigimg="digitalgoods.mybigimg"
+      ></my-goods>
+
+      <!-- 服装箱包商品  clothesgoods-->
+
+      <my-goods
+        :mytitle="clothesgoods.mytitle"
+        :lineguide="clothesgoods.mylineguide"
+        :smimgdata="clothesgoods.mysmimgdata"
+        :bigimg="clothesgoods.mybigimg"
+      ></my-goods>
+
+      <!-- 居家生活商品  lifegoods -->
+
+      <my-goods
+        :mytitle="lifegoods.mytitle"
+        :lineguide="lifegoods.mylineguide"
+        :smimgdata="lifegoods.mysmimgdata"
+        :bigimg="lifegoods.mybigimg"
+      ></my-goods>
+
+      <!-- 精选主题 -->
+      <div class="jingxuanbox">
+        <div style="font-size:30px">精选主题</div>
+        <el-divider>
+          新球大战 | 复仇者联盟 | 神偷奶爸 | 蜘蛛侠 | 查看更多
+          <i class="el-icon-arrow-right"></i>
+        </el-divider>
+
+        <div
+          class="jximgbox clear"
+          style="background-image: url('http://img5.mtime.cn/mg/2019/07/03/165526.58329947.jpg')"
+        >
+          <div class="bcimgbox">
+            <div
+              style="background-image: url('http://img5.mtime.cn/mg/2019/07/03/165932.18328130.jpg')"
+            >
+              <strong>￥ 99</strong>
+            </div>
+            <div
+              style="background-image: url('http://img5.mtime.cn/mg/2019/07/03/170150.34640365.jpg')"
+            >
+              <strong>￥ 49</strong>
+            </div>
+            <div
+              style="background-image: url('http://img5.mtime.cn/mg/2019/07/03/170200.39184557.jpg')"
+            >
+              <strong>￥ 39</strong>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="jximgbox clear"
+          style="background-image: url('http://img5.mtime.cn/mg/2019/04/25/181312.36353315.jpg')"
+        >
+          <div class="bcimgbox">
+            <div
+              style="background-image: url('http://img5.mtime.cn/mg/2019/04/25/181149.19549901.jpg')"
+            >
+              <strong>￥ 45</strong>
+            </div>
+            <div
+              style="background-image: url('http://img5.mtime.cn/mg/2019/04/25/181342.71876299.jpg')"
+            >
+              <strong>￥ 239</strong>
+            </div>
+            <div
+              style="background-image: url('http://img5.mtime.cn/mg/2019/04/25/181406.52340258.jpg')"
+            >
+              <strong>￥ 49</strong>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="jximgbox clear"
+          style="background-image: url('http://img5.mtime.cn/mg/2018/08/07/152154.20104873.jpg')"
+        >
+          <div class="bcimgbox">
+            <div
+              style="background-image: url('http://img5.mtime.cn/mg/2018/08/20/101644.41505034.jpg')"
+            >
+              <strong>￥ 40</strong>
+            </div>
+            <div
+              style="background-image: url('http://img5.mtime.cn/mg/2018/11/26/150507.15240230.jpg')"
+            >
+              <strong>￥ 129</strong>
+            </div>
+            <div
+              style="background-image: url('http://img5.mtime.cn/mg/2018/08/07/154243.96899805.jpg')"
+            >
+              <strong>￥ 39</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <el-divider>
+        <span style="font-size:25px">猜 你 喜 欢</span>
+      </el-divider>
+
+      <!-- 猜你喜欢 -->
+      <div class="gsylikebox">
+        <my-gsulike
+          v-for="(gsu,index) in gsulikegoods"
+          :key="index"
+          :mysrc="gsu.img"
+          :goodsname="gsu.name"
+          :price="gsu.price"
+          :myalt="gsu.name"
+          :id="gsu.id"
+        ></my-gsulike>
+      </div>
+    </div>
 
     <bottom-menu></bottom-menu>
   </div>
@@ -258,6 +291,8 @@ import gsulike from "../components/guessulikegoods.vue";
 export default {
   data() {
     return {
+      keyword: "",
+      goodsnamedata: [],
       activeIndex: "1",
       block: false,
       guidearr: [
@@ -380,6 +415,23 @@ export default {
       gsulikegoods: []
     };
   },
+  watch: {
+    keyword: function() {
+      this.axios
+        .get("http://localhost:8888/searchgoods", {
+          params: {
+            goodsname: this.keyword
+          }
+        })
+        .then(res => {
+          this.goodsnamedata = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
+
   methods: {
     displayblock: function(index) {
       this.block = true;
@@ -392,6 +444,16 @@ export default {
     },
     changecolor: function(index) {
       document.querySelectorAll(".leftbox>div")[index].style.color = "black";
+    },
+    changegray: function(index) {
+      document.querySelectorAll(".mylistyle")[index].style.background =
+        "#f6f6f6";
+    },
+    changewhite: function(index) {
+      document.querySelectorAll(".mylistyle")[index].style.background = "white";
+    },
+    searchinput: function() {
+      this.$router.push("/searchAll?goodsname=" + this.keyword);
     }
   },
   components: {
@@ -481,9 +543,9 @@ export default {
 .clear::after {
   clear: both;
 }
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
+.container {
+  width: 73.77375em;
+  margin: 0 auto;
 }
 .el-menu-demo {
   padding: 15px 10px;
@@ -492,9 +554,7 @@ export default {
   display: flex;
   justify-content: space-around;
 }
-.sousuo[data-v-042c2b78] {
-  margin: 26px 0;
-}
+
 .el-menu.el-menu--horizontal {
   border-bottom: 1px solid transparent;
 }
@@ -647,5 +707,72 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+/* 搜索框样式 */
+.sousuo {
+  width: 500px;
+  height: 38px;
+  border: 1px solid lightgray;
+  border-radius: 19px;
+  margin: 10px auto;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 4px 7px 14px;
+}
+.el-dropdown-link {
+  cursor: pointer;
+  color: gray;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
+}
+.span {
+  height: 14px;
+  color: lightgray;
+  margin: 12px 10px 12px 12px;
+}
+input {
+  width: 320px;
+  height: 20px;
+  border: 1px solid transparent;
+  outline: none;
+}
+.icon {
+  width: 54px;
+  height: 32px;
+  margin-top: -6px;
+  font-size: 18px;
+  border: 0px solid transparent;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 32px;
+}
+.icon:hover {
+  background-color: #1e7dd7;
+  color: white;
+}
+.sousuo {
+  margin-top: 1.5em;
+}
+.inputbox {
+  position: relative;
+}
+.searchdetail {
+  position: absolute;
+  width: 20em;
+  top: 30px;
+  z-index: 10;
+}
+.mylistyle {
+  list-style: none;
+  box-sizing: border-box;
+  background: white;
+  color: gray;
+  height: 3em;
+  font-size: 14px;
+  line-height: 3em;
+  text-align: start;
 }
 </style>
