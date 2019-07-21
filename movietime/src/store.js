@@ -13,7 +13,7 @@ export default new Vuex.Store({
 
   },
   getters: {
-    //¹ºÎï³µÉÏÃæÊý×ÖÔö¼Ó
+    //è´­ç‰©è½¦ä¸Šé¢æ•°å­—å¢žåŠ 
     shopcarnum: state => {
       return state.shopcar += 0
     }

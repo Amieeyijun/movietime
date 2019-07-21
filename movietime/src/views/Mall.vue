@@ -36,7 +36,12 @@
             <span class="span">|</span>
           </div>
           <div class="inputbox">
-            <input type="text" v-model="keyword" placeholder="请输入电影、商品、影院等" />
+            <input
+              type="text"
+              v-model="keyword"
+              placeholder="请输入电影、商品、影院等"
+              @keyup.enter="searchinput"
+            />
             <div class="searchdetail">
               <ul v-for="(n,index) in goodsnamedata" :key="(n,index)">
                 <a :href="'/Magnify?id='+n.id">
@@ -44,7 +49,10 @@
                     class="mylistyle"
                     @mouseenter="changegray(index)"
                     @mouseleave="changewhite(index)"
-                  >{{n.name}}</li>
+                    v-html="blackname(n.name)"
+                  >
+                    <!-- {{n.name}} -->
+                  </li>
                 </a>
               </ul>
             </div>
@@ -454,6 +462,10 @@ export default {
     },
     searchinput: function() {
       this.$router.push("/searchAll?goodsname=" + this.keyword);
+    },
+    //把搜索关键字的颜色变成黑色
+    blackname: function(str) {
+      return str.replace(this.keyword, this.keyword.fontcolor("black"));
     }
   },
   components: {
