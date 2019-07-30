@@ -72,6 +72,7 @@ export default {
                 });
                 this.$router.push({ path: "/" });
                 window.sessionStorage.setItem("user",JSON.stringify(response.data.userinfo))
+                console.log(window.sessionStorage)
               }else if(response.data.msg =="different"){
                 const h = this.$createElement;
 

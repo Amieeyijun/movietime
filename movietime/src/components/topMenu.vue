@@ -25,16 +25,40 @@
       <el-menu-item index="10" class="el-icon-shopping-bag-2 right1">
         <div class="num">{{this.$store.getters.shopcarnum}}</div>
       </el-menu-item>
-      <el-menu-item index="7" class="el-icon-user right2"></el-menu-item>
-    </el-menu>
+      <el-menu-item index="7" class="el-icon-user right2" v-show="flag"></el-menu-item>
 
+      <el-menu-item v-show="flag1" class="fr denglu">
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            <a href="#">{{name}},欢迎您登录！</a>
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>
+              <a class="myps" href="#">个人信息</a>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <a class="myps" href="#">修改信息</a>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <span @click="ulogout">退出登录</span>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </el-menu-item>
+    </el-menu>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      activeIndex2: "1"
+      activeIndex2: "1",
+      name: "",
+      flag: true,
+      flag1: false,
+      userAll: "",
+      userone: {}
     };
   },
   methods: {
@@ -46,24 +70,29 @@ export default {
         case "1":
           this.$router.push({ path: "/" });
           break;
-          case "2":
+        case "2":
           this.$router.push({ path: "/Ticket" });
           break;
-          case "3":
+        case "3":
           this.$router.push({ path: "/Mall" });
           break;
-          case "4":
+        case "4":
           this.$router.push({ path: "/News" });
           break;
-          case "5":
+        case "5":
           this.$router.push({ path: "/Discover" });
           break;
-          case "10":
+        case "10":
           this.$router.push({ path: "/Shopping" });
           break;
         default:
           break;
       }
+    },
+    ulogout() {
+      this.flag = true;
+      this.flag1 = false;
+      sessionStorage.clear()
     }
   },
   created() {
@@ -71,39 +100,46 @@ export default {
       this.activeIndex2 = "7";
     } else if (this.$route.path == "/") {
       this.activeIndex2 = "1";
-    }
-    else if (this.$route.path == "/Ticket") {
+    } else if (this.$route.path == "/Ticket") {
       this.activeIndex2 = "2";
-    }
-    else if (this.$route.path == "/Mall") {
+    } else if (this.$route.path == "/Mall") {
       this.activeIndex2 = "3";
-    }
-    else if (this.$route.path == "/News") {
+    } else if (this.$route.path == "/News") {
       this.activeIndex2 = "4";
-    }
-    else if (this.$route.path == "/Discover") {
+    } else if (this.$route.path == "/Discover") {
       this.activeIndex2 = "5";
-    }
-    else if(this.$route.path == "/Shopping") {
+    } else if (this.$route.path == "/Shopping") {
       this.activeIndex2 = "10";
-    }else if(this.$route.path == "/Load") {
+    } else if (this.$route.path == "/Load") {
       this.activeIndex2 = "7";
     }
-    
+
+    this.userAll = window.sessionStorage.getItem("user");
+    console.log(this.userAll);
+    this.userone = JSON.parse(this.userAll);
+    console.log(this.userone);
+    if (this.userone.username) {
+      this.flag = false;
+      this.flag1 = true;
+      this.name = this.userone.username;
+    } else {
+      this.flag = true;
+      this.flag1 = false;
+    }
   }
 };
 </script>
 <style>
-.el-menu--horizontal>.el-menu-item{
+.el-menu--horizontal > .el-menu-item {
   margin-left: 24px;
   height: 56px;
 }
-#title img{
+#title img {
   width: 170px;
   height: 75px;
   margin-top: -10px;
 }
-#title{
+#title {
   width: 170px;
   height: 56px;
   overflow: hidden;
@@ -131,7 +167,7 @@ export default {
 .right2 {
   font-size: 24px;
   position: absolute;
-  right: 2%;
+  right: 1%;
 }
 .top-1 {
   width: 34%;
@@ -144,6 +180,15 @@ export default {
   display: block;
   clear: both;
 }
+.fr {
+  position: absolute;
+  right: 11%;
+}
 </style>
 
+<style scoped>
+.fr a {
+  color: white;
+}
+</style>
 

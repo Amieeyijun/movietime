@@ -3,6 +3,21 @@
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser")
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+// 文件上传的相关配置
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, './uploads')
+	},
+	filename: function (req, file, cb) {
+		cb(null, new Date().valueOf() + '-' + Math.random().toString().substr(2, 8) + '.' + file.originalname.split('.').pop())
+	}
+});
+const upload = multer({ storage: storage });
+
 const mydb = mysql.createConnection({
 	host: "localhost",
 	port: 3306,
@@ -25,6 +40,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse application/json
 app.use(bodyParser.json());
+
+// 启用cookie
+let secret = 'app.h5190304.com';
+app.use(cookieParser(secret));
+// 启用session
+app.use(session({
+	secret: secret,
+	resave: false,
+	saveUninitialized: true,
+	cookie: { maxAge: 7 * 24 * 3600000 }
+}));
+
 //获取热门商品
 app.get("/gethotgoods", function (req, res) {
 	let sql = "select * from product where type =" + `'${req.query.goodsclass}'`;
@@ -212,10 +239,14 @@ app.post("/Load", function (req, res) {
 		} else if (results.length == 1) {
 			console.log(results)
 			if (results[0].password == req.body.pass) {
+				// req.session.id = results[0].id;
+				// req.session.name = results[0].username;
 				res.json({
 					msg: "same",
-					userinfo: results[0]
+					userinfo: results[0],
+					// myid:results[0].id
 				})
+				
 			} else {
 				res.json({
 					msg: "different"
@@ -226,7 +257,12 @@ app.post("/Load", function (req, res) {
 
 	})
 });
-
+//提供session信息的路由
+// app.get('/checku', (req, res) => {
+//     console.log(req.session);
+// 	res.json({ id: req.session.id, name: req.session.name });
+// 	console.log(req.session.aid)
+// });
 
 
 app.listen(8888, function () {
