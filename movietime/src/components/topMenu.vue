@@ -30,7 +30,7 @@
       <el-menu-item v-show="flag1" class="fr denglu">
         <el-dropdown>
           <span class="el-dropdown-link">
-            <a href="#">{{name}},欢迎您登录！</a>
+            <a href="#">欢迎您,{{name}}！</a>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -92,7 +92,7 @@ export default {
     ulogout() {
       this.flag = true;
       this.flag1 = false;
-      sessionStorage.clear()
+      sessionStorage.clear();
     }
   },
   created() {

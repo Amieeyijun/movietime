@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="imgbox">
+    <div class="imgbox" @click="toDetail(id)">
       <img :src="mysrc" :alt="myalt" />
 
       <div>
@@ -10,7 +10,7 @@
         </div>
         <div class="price">
           <div>{{price}}</div>
-          <a :href="'/Magnify?id='+id" class="el-icon-shopping-cart-2" style="font-size:20px"></a>
+          <a href="javascript:void(0)" class="el-icon-shopping-cart-2" style="font-size:20px"></a>
         </div>
       </div>
     </div>
@@ -18,7 +18,12 @@
 </template>
 <script>
 export default {
-  props: ["mysrc", "goodsname", "price", "myalt", "id"]
+  props: ["mysrc", "goodsname", "price", "myalt", "id"],
+  methods: {
+    toDetail(id) {
+      this.$router.push("/Magnify?id=" + id);
+    }
+  }
 };
 </script>
 <style scoped>

@@ -19,16 +19,13 @@
             class="smimg"
             v-for="(img,index) in smimgdata"
             :key="(img,index)"
+            @click="toDetail(img.id)"
           >
             <div class="infobox">
               <p>{{img.name}}</p>
               <p>{{img.price}}</p>
               <div class="gwcar">
-                <a
-                  :href="'/Magnify?id='+img.id"
-                  class="el-icon-shopping-cart-2"
-                  style="font-size:20px"
-                ></a>
+                <a href="javascript:void(0)" class="el-icon-shopping-cart-2" style="font-size:20px"></a>
               </div>
             </div>
           </div>
@@ -52,6 +49,11 @@ export default {
       return this.smimgdata.map(item => {
         return { backgroundImage: "url(" + item.img + ")" };
       });
+    }
+  },
+  methods: {
+    toDetail(id) {
+      this.$router.push("/Magnify?id=" + id);
     }
   }
 };
@@ -96,6 +98,9 @@ export default {
   display: flex;
   align-items: flex-end;
   background-repeat: no-repeat;
+}
+.smimg :hover {
+  cursor: pointer;
 }
 .infobox {
   margin: 0 auto;

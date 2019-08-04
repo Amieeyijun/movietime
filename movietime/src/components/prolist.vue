@@ -17,36 +17,37 @@
         </ul>
       </div>
       <!-- 具体的商品信息 -->
-      <div class="cart_shangping">
+      <div class="cart_shangping" v-for="(item,index) in goodsData" :key="(item,index)">
         <div class="details">
           <ul>
             <li>
               <div class="details_mes">
                 <input type="checkbox" id="selectall" />
-                <img src="http://img5.mtime.cn/goods/2016/10/12/162446.54410720_100X100X3.jpg" />
+                <img :src="item.img" />
                 <div class="details_mes_name">
-                  <p>自营</p>aniplex+ 1/8 加藤恵 和服
+                  <p>自营</p>
+                  {{item.name}}
                 </div>
               </div>
             </li>
             <!-- 价格 -->
-            <li>￥1040</li>
+            <li>{{item.price}}</li>
             <!-- 优惠 -->
             <li></li>
             <!-- 数量 -->
             <li>
               <div class="mount">
-                <p @click="reduce">-</p>
-                <input type="text" placeholder="2" id="reduce" />
-                <p @click="increase">+</p>
+                <p @click="reduce(index)">-</p>
+                <input type="text" class="reduce" :value="item.num" />
+                <p @click="increase(index)">+</p>
               </div>
             </li>
             <!-- 小计 -->
-            <li>￥1040</li>
+            <li>￥{{(item.num)*(Number(item.price.substr(1)))}}</li>
             <!-- 操作 -->
             <li>
               <a href="#">收藏</a>
-              <a href="#">删除</a>
+              <a href="#" @click="delpro(item.id)">删除</a>
             </li>
           </ul>
         </div>
@@ -62,11 +63,11 @@
           <li>收藏</li>
         </ul>
         <div class="settlement_btn">
-          <span>共 0 件商品，商品总价(不含运费):</span>
-          ￥0
+          <span>共{{this.$store.state.shopcar}}件商品，商品总价(不含运费):{{this.tprice}}</span>
+
           <!-- <div>
             <a href="#">去结算</a>
-          </div> -->
+          </div>-->
         </div>
       </div>
     </div>
@@ -77,34 +78,44 @@ export default {
   data() {
     return {};
   },
+  props: ["goodsData"],
   methods: {
     // 减少函数
-    reduce() {
-      var inpval = document.getElementById("reduce");
-      if (inpval.placeholder <= 1) {
+    reduce(ind) {
+      var inpval = document.getElementsByClassName("reduce")[ind];
+      if (inpval.value <= 1) {
         alert("主人，我真的不能没有你");
       } else {
-        inpval.placeholder--;
+        inpval.value--;
       }
     },
     // 增加函数
-    increase() {
-      var inpval = document.getElementById("reduce");
-      inpval.placeholder++;
+    increase(ind) {
+      var inpval = document.getElementsByClassName("reduce")[ind];
+      inpval.value++;
     },
     // 全选操作
     fm() {
       var inp = document.getElementsByTagName("input");
       if (inp[0].checked) {
         for (let i = 1; i < inp.length; i++) {
-          console.log(inp[i])
+          console.log(inp[i]);
           inp[i].checked = true;
         }
-      }else{
-         for (let i = 1; i <inp.length; i++) {
+      } else {
+        for (let i = 1; i < inp.length; i++) {
           inp[i].checked = false;
-        } 
         }
+      }
+    },
+    //删除商品
+    delpro(gid) {
+      this.$store.commit("delPro", gid);
+    }
+  },
+  computed: {
+    tprice: function() {
+      return this.$store.getters.totalprice;
     }
   },
   // 数据挂载

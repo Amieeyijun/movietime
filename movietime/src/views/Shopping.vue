@@ -14,16 +14,20 @@
                 <el-step title="填写订单"></el-step>
                 <el-step title="付款"></el-step>
                 <el-step title="支付成功"></el-step>
-              </el-steps>             
+              </el-steps>
             </div>
           </div>
         </div>
-        <div v-if="tag">
+        <!-- <div v-if="tag">
           <prolist></prolist>
+        </div>-->
+        <div>
+          <prolist :goodsData="this.goodsdata"></prolist>
         </div>
         <div v-if="hide">
           <consignee></consignee>
         </div>
+
         <el-button v-if="hi" style="margin-top: 0px;" @click="next">生成订单</el-button>
         <el-button v-if="he" style="margin-top: 0px;" @click="next">前往支付</el-button>
         <bottom-menu></bottom-menu>
@@ -33,31 +37,30 @@
 </template>
 <script>
 import Prolist from "@/components/prolist.vue";
-import consignee from '../components/consignee'
+import consignee from "../components/consignee";
 export default {
   data() {
     return {
- active: 0,
-      hide:false,
-      hi:true,
-      he:false,
+      active: 0,
+      hide: false,
+      hi: true,
+      he: false,
       filmdata: [],
       tag: false,
-       goodsdata: {}
+      goodsdata: []
     };
   },
-    methods: {
+  methods: {
     next() {
       if (this.active++ > 2) this.active = 0;
-      this.hide=true;
-      this.hi=false;
-      this.he=true
+      this.hide = true;
+      this.hi = false;
+      this.he = true;
     }
   },
   components: {
-  prolist: Prolist,
-    consignee:consignee
-   
+    prolist: Prolist,
+    consignee: consignee
   },
   created() {
     console.log(this.$store.state.filmid);
@@ -74,19 +77,7 @@ export default {
         console.log(err);
       });
 
-    this.axios
-      .get("http://localhost:8888/serachgoods", {
-        params: {
-          goodsid: this.$store.state.goodsid
-        }
-      })
-      .then(res => {
-        console.log(res.data[0]);
-        this.goodsdata = res.data[0];
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.goodsdata = this.$store.state.car;
   },
   mounted() {
     console.log(this.filmdata);

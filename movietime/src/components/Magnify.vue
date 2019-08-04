@@ -53,7 +53,7 @@
 
                 <el-row class="btnbox">
                   <el-button type="danger" round>立即购买</el-button>
-                  <el-button round style="color:#F56C6C" @click="getbookid">
+                  <el-button round style="color:#F56C6C" @click="addCar">
                     <i class="el-icon-shopping-cart-2"></i>加入购物车
                   </el-button>
                 </el-row>
@@ -157,9 +157,12 @@ export default {
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop;
     },
-    getbookid() {
-      this.$store.state.goodsid = this.$route.query.id;
+    addCar() {
+      // this.$store.state.goodsid = this.$route.query.id;
       this.$store.state.shopcar += 1;
+      //购物车加入商品的数量初始化  为1
+      this.imgdata.num = 1;
+      this.$store.commit("addCar", this.imgdata);
     }
   }
 };
